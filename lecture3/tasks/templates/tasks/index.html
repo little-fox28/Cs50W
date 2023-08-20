@@ -1,0 +1,17 @@
+{% extends "tasks/layout.html" %}
+<script>
+  window.addEventListener("beforeunload", function (event) {
+    event.preventDefault();
+  });
+</script>
+{% block body %}
+<h2>Tasks</h2>
+<ul>
+  {% for task in tasks %}
+  <li>{{task}}</li>
+  {% empty %}
+  <li>No task.</li>
+  {% endfor %}
+</ul>
+<a href="{% url 'tasks:add' %}">Add Task</a>
+{% endblock %}
