@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tasks</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const newTask = document.querySelector("#newTask");
+        const submit = document.querySelector("#submit");
+
+        submit.disabled = true;
+
+        newTask.onkeyup = () => {
+          if (newTask.value.length > 0) {
+            submit.disabled = false;
+          } else {
+            submit.disabled = true;
+          }
+        };
+        document.querySelector("form").onsubmit = () => {
+          
+          // Delete a element "li"
+          
+          
+          // Create a new element "li"
+          const li = document.createElement("li");
+          li.innerHTML = newTask.value;
+          document.querySelector("#tasks").append(li);
+          // Clear input
+          newTask.value = "";
+
+          return false;
+        };
+
+        
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Tasks</h1>
+    <ul id="tasks">
+      <!-- <input type="submit" id="del" value="x"> -->
+    </ul>
+    <form action="tasks.html" method="post">
+      <input autofocus type="text" id="newTask" placeholder="New Tasks" />
+      <input type="submit" id="submit" value="Submit" />
+    </form>
+  </body>
+</html>
