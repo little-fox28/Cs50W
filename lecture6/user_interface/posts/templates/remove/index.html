@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Remove</title>
+    <style>
+      .post {
+        background-color: #77dd11;
+        padding: 20px;
+        margin: 10px;
+
+        display: flex;
+        justify-content: space-between;
+
+        animation: hide;
+        animation-duration: 2s;
+        animation-fill-mode: forwards;
+        animation-play-state: paused;
+      }
+      body {
+        padding-bottom: 50px;
+      }
+
+      @keyframes hide {
+        0% {
+          opacity: 1;
+          height: 100%;
+          line-height: 100%;
+          padding: 20px;
+          margin-bottom: 10px;
+        }
+        75% {
+          opacity: 0;
+          height: 100%;
+          line-height: 100%;
+          padding: 20px;
+          margin-bottom: 10px;
+        }
+        100% {
+          opacity: 0;
+          height: 0px;
+          line-height: 0px;
+          padding: 0px;
+          margin-bottom: 0px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Remove</h1>
+    <div id="remove"></div>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", Load());
+
+    function Load() {
+      const start = 1;
+      const end = 20;
+
+      fetch(`/posts/posts?start=${start}&end=${end}`)
+        .then((res) => res.json())
+        .then((data) => {
+          data.posts.forEach(add_post);
+        });
+
+      function add_post(content) {
+        const post = document.createElement("div");
+        post.className = "post";
+        post.innerHTML = `${content}<button class="remove">X</button> `;
+
+        document.querySelector("#remove").append(post);
+      }
+
+      document.addEventListener("click", (event) => {
+        const element = event.target;
+        if (element.className === "remove") {
+          element.parentElement.style.animationPlayState = "running";
+          element.parentElement.addEventListener("animationend", () => {
+            element.parentElement.remove();
+          });
+        }
+      });
+    }
+  </script>
+</html>

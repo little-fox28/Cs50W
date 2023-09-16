@@ -25,3 +25,6 @@ def posts(request):
     return JsonResponse({
         "posts": data
     })
+
+def remove(request):
+    return render(request, "remove/index.html")
