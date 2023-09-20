@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scroll</title>
+  </head>
+  <body>
+    <button id="scrollButton">Scroll to the end</button>
+    <div id="number"></div>
+  </body>
+  <script>
+    for (let i = 0; i <= 100; i++) {
+      const p = document.createElement("p");
+      p.innerHTML += i;
+      document.querySelector("#number").append(p);
+    }
+
+    // Function to scroll to the end of the page
+    function scrollToBottom() {
+      window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    // Attach the scrollToBottom function to the button's click event
+    document
+      .getElementById("scrollButton")
+      .addEventListener("click", scrollToBottom);
+
+    window.onscroll = () => {
+      if (window.scrollY + window.innerHeight >= document.body.scrollHeight) {
+        document.body.style.background = "red";
+      } else {
+        document.body.style.background = "white";
+      }
+    };
+  </script>
+</html>
